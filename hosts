@@ -1,4 +1,19 @@
 [vpn]
-
+node01 vpn_ip=10.0.0.1 ansible_host=165.22.223.110
+node02 vpn_ip=10.0.0.2 ansible_host=165.22.223.105
+node03 vpn_ip=10.0.0.3 ansible_host=165.22.223.100
+node04 vpn_ip=10.0.0.4 ansible_host=139.59.81.233
 
 [removevpn]
+
+[master_node_1]
+node01
+
+[master_node_2]
+node02
+
+[master_node_3]
+node03
+
+[data_node_1]
+node04

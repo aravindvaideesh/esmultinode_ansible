@@ -3,7 +3,79 @@
 - hosts: vpn
   roles:
     - tinc
-
-- hosts: removevpn
+    
+- hosts: master_node_1
   roles:
-    - tinc-remove
+    - role: elasticsearch
+  vars:
+    es_config:
+      cluster.initial_master_nodes: "node01, node02, node03"
+      network.host: "_vpn0_, _local_"
+      cluster.name: "production"
+      discovery.seed_hosts: "node01:9300, node02:9300, node03:9300"
+      http.port: 9200 
+      transport.tcp.port: 9300
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: false
+    es_major_version: "7.x"
+    es_version: "7.6.0"
+    es_heap_size: "2g"
+    es_cluster_name: "production"
+
+- hosts: master_node_2
+  roles:
+    - role: elasticsearch
+  vars:
+    es_config:
+      cluster.initial_master_nodes: "node01, node02, node03"
+      network.host: "_vpn0_, _local_"
+      cluster.name: "production"
+      discovery.seed_hosts: "node01:9300, node02:9300, node03:9300"
+      http.port: 9200 
+      transport.tcp.port: 9300
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: false
+    es_major_version: "7.x"
+    es_version: "7.6.0"
+    es_heap_size: "2g"
+    es_cluster_name: "production"
+
+- hosts: master_node_3
+  roles:
+    - role: elasticsearch
+  vars:
+    es_config:
+      cluster.initial_master_nodes: "node01, node02, node03"
+      network.host: "_vpn0_, _local_"
+      cluster.name: "production"
+      discovery.seed_hosts: "node01:9300, node02:9300, node03:9300"
+      http.port: 9200 
+      transport.tcp.port: 9300
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: false
+    es_major_version: "7.x"
+    es_version: "7.6.0"
+    es_heap_size: "2g"
+    es_cluster_name: "production"
+
+- hosts: data_node_1
+  roles:
+    - role: elasticsearch
+  vars:
+    es_config:
+      cluster.initial_master_nodes: "node01, node02, node03"
+      network.host: "_vpn0_, _local_"
+      cluster.name: "production"
+      discovery.seed_hosts: "node01:9300, node02:9300, node03:9300"
+      http.port: 9200 
+      transport.tcp.port: 9300
+      node.data: true
+      node.master: false
+      bootstrap.memory_lock: false
+    es_major_version: "7.x"
+    es_version: "7.6.0"
+    es_heap_size: "2g"
+    es_cluster_name: "production"
